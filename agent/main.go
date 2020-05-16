@@ -11,6 +11,13 @@ import (
 )
 
 type System struct {
+	Host struct {
+		Hostname string `json:"Hostname"`
+		Kernel struct {
+			Release string `json:"Release"`
+			Version string `json:"Version"`
+		} `json:"Kernel"`
+	} `json:"Host"`
 	CPU struct {
 		Utilization float64 `json:"Utilization"`
 		LoadAvg     struct {
@@ -37,6 +44,8 @@ func scheduler() {
 
 	for {
 		select {
+		case <-GetNetworkInfoTicker.C:
+			go getHostInfo()
 		case <-GetNetworkInfoTicker.C:
 			go getNetworkInfo()
 		case <-GetCPUInfoTicker.C:
