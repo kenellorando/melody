@@ -22,23 +22,29 @@ func main() {
 	clog.Fatal("main", "Server failed to start!", http.ListenAndServe(":8900", r))
 }
 
-
 // Declare object to hold r body data
 type System struct {
+	Host struct {
+		Hostname string `json:"Hostname"`
+		Kernel   struct {
+			Release string `json:"Release"`
+			Version string `json:"Version"`
+		} `json:"Kernel"`
+	} `json:"Host"`
 	CPU struct {
-		Utilization float64
+		Utilization float64 `json:"Utilization"`
 		LoadAvg     struct {
-			OneMin     float64
-			FiveMin    float64
-			FifteenMin float64
-		}
-	}
+			OneMin     float64 `json:"OneMin"`
+			FiveMin    float64 `json:"FiveMin"`
+			FifteenMin float64 `json:"FifteenMin"`
+		} `json:"LoadAvg"`
+	} `json:"CPU"`
 	Network struct {
-		PublicIP string
-	}
+		PublicIP string `json:"PublicIP"`
+	} `json:"Network"`
 }
-var system System
 
+var system System
 
 // Receiver - receiver of agent data
 func Receiver(w http.ResponseWriter, r *http.Request) {
