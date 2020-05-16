@@ -2,7 +2,6 @@ package main
 
 import (
 	"bufio"
-	"fmt"
 	"math"
 	"os"
 	"strconv"
@@ -31,17 +30,7 @@ func getMemoryInfo() {
 	system.Memory.SwapFree = memStats["SwapFree"] / 1024
 
 	if !(system.Memory.Total == 0 && system.Memory.SwapTotal == 0) {
-		fmt.Println("Test")
 		system.Memory.PercentUsed = (math.Round((float64(system.Memory.Total-system.Memory.Free)/float64(system.Memory.Total))*10000) / 100)
 		system.Memory.SwapPercentUsed = (math.Round((float64(system.Memory.SwapTotal-system.Memory.SwapFree)/float64(system.Memory.SwapTotal))*100) / 100)
-
 	}
-
 }
-
-// Total           int32   `json:"Total"`
-// Free            int32   `json:"Free"`
-// PercentUsed     float64 `json:"PercentUsed"`
-// SwapTotal       int32   `json:"SwapTotal"`
-// SwapFree        int32   `json:"SwapFree"`
-// SwapPercentUsed float64 `json:"SwapPercentUsed"`

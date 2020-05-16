@@ -33,7 +33,7 @@ type System struct {
 		SwapTotal       int64   `json:"SwapTotal"`
 		SwapFree        int64   `json:"SwapFree"`
 		SwapPercentUsed float64 `json:"SwapPercentUsed"`
-	}
+	} `json:"Memory"`
 	Network struct {
 		PublicIP string `json:"PublicIP"`
 	} `json:"Network"`
