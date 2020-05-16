@@ -17,7 +17,7 @@
                 url: 'https://api.melody.systems/api/v0.1/getreport',
                 success: function(data) {
                     console.log(data);
-                    document.getElementById("rawoutput").innerHTML = data;
+                    document.getElementById("rawoutput").innerHTML = JSON.stringify(data);
                 }
             })
         }
