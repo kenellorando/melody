@@ -26,6 +26,14 @@ type System struct {
 			FifteenMin float64 `json:"FifteenMin"`
 		} `json:"LoadAvg"`
 	} `json:"CPU"`
+	Memory struct {
+		Total           int64   `json:"Total"`
+		Free            int64   `json:"Free"`
+		PercentUsed     float64 `json:"PercentUsed"`
+		SwapTotal       int64   `json:"SwapTotal"`
+		SwapFree        int64   `json:"SwapFree"`
+		SwapPercentUsed float64 `json:"SwapPercentUsed"`
+	}
 	Network struct {
 		PublicIP string `json:"PublicIP"`
 	} `json:"Network"`
@@ -39,20 +47,24 @@ func main() {
 
 func scheduler() {
 	// First time runs
-	getCPUInfo()
-	getNetworkInfo()
-	getHostInfo()
+	go getCPUInfo()
+	go getMemoryInfo()
+	go getNetworkInfo()
+	go getHostInfo()
 
 	// Agent data gathering time intervals
-	GetCPUInfoTicker := time.NewTicker(5 * time.Second)
+	GetCPUInfoTicker := time.NewTicker(1 * time.Second)
+	GetMemoryInfoTicker := time.NewTicker(5 * time.Second)
 	GetNetworkInfoTicker := time.NewTicker(30 * time.Second)
 	GetHostInfoTicker := time.NewTicker(30 * time.Second)
-	ReporterTicker := time.NewTicker(5 * time.Second)
+	ReporterTicker := time.NewTicker(1 * time.Second)
 
 	for {
 		select {
 		case <-GetCPUInfoTicker.C:
 			go getCPUInfo()
+		case <-GetMemoryInfoTicker.C:
+			go getMemoryInfo()
 		case <-GetNetworkInfoTicker.C:
 			go getNetworkInfo()
 		case <-GetHostInfoTicker.C:
