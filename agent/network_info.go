@@ -6,6 +6,10 @@ import (
 )
 
 func getNetworkInfo() {
+	go getPublicIP()
+}
+
+func getPublicIP() {
 	curlCommand := "curl"
 	curlEndpoint := "https://ipinfo.io/ip"
 
