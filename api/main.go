@@ -64,6 +64,7 @@ func Receiver(w http.ResponseWriter, r *http.Request) {
 // Retriever - gets agent data
 func Retriever(w http.ResponseWriter, r *http.Request) {
 	jsonMarshal, _ := json.Marshal(system)
+	w.Header().Set("Access-Control-Allow-Origin", "*")
 	w.Header().Set("Content-Type", "application/json")
 	w.Write(jsonMarshal)
 }

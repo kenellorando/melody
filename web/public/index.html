@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <title>Melody</title>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            setTimeout(function () {getReport();}, 0);
+            setInterval(function () {getReport();}, 1000)
+        })
+
+        function getReport() {
+            $.ajax({
+                type: 'GET',
+                url: 'https://api.melody.systems/api/v0.1/getreport',
+                success: function(data) {
+                    console.log(data);
+                    document.getElementById("rawoutput").innerHTML = JSON.stringify(data);
+                }
+            })
+        }
+                    
+    </script>
+</head>
+<body>
+    <h1>Melody</h1>
+    <p>Systems Infrastructure Monitor</p>
+
+    <div id="rawoutput"></div>
+</body>
+</html>
