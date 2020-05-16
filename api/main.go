@@ -50,7 +50,7 @@ var system System
 func Receiver(w http.ResponseWriter, r *http.Request) {
 	// Decode r.Body
 	json.NewDecoder(r.Body).Decode(&system)
-	clog.Debug("Receiver", fmt.Sprintf("Agent report decoded: '%v'", system))
+	clog.Debug("Receiver", fmt.Sprintf("'%v'", system))
 }
 
 // Retriever - gets agent data

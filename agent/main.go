@@ -13,7 +13,7 @@ import (
 type System struct {
 	Host struct {
 		Hostname string `json:"Hostname"`
-		Kernel struct {
+		Kernel   struct {
 			Release string `json:"Release"`
 			Version string `json:"Version"`
 		} `json:"Kernel"`
@@ -38,18 +38,25 @@ func main() {
 }
 
 func scheduler() {
-	ReporterTicker := time.NewTicker(1 * time.Second)
-	GetCPUInfoTicker := time.NewTicker(1 * time.Second)
-	GetNetworkInfoTicker := time.NewTicker(1 * time.Second)
+	// First time runs
+	getCPUInfo()
+	getNetworkInfo()
+	getHostInfo()
+
+	// Agent data gathering time intervals
+	GetCPUInfoTicker := time.NewTicker(5 * time.Second)
+	GetNetworkInfoTicker := time.NewTicker(30 * time.Second)
+	GetHostInfoTicker := time.NewTicker(30 * time.Second)
+	ReporterTicker := time.NewTicker(5 * time.Second)
 
 	for {
 		select {
-		case <-GetNetworkInfoTicker.C:
-			go getHostInfo()
-		case <-GetNetworkInfoTicker.C:
-			go getNetworkInfo()
 		case <-GetCPUInfoTicker.C:
 			go getCPUInfo()
+		case <-GetNetworkInfoTicker.C:
+			go getNetworkInfo()
+		case <-GetHostInfoTicker.C:
+			go getHostInfo()
 		case <-ReporterTicker.C:
 			go reporter()
 		}
@@ -58,7 +65,7 @@ func scheduler() {
 
 func reporter() {
 	report, _ := json.Marshal(system)
-	clog.Debug("reporter", fmt.Sprintf("Sending data to API receiver: %v", bytes.NewBuffer(report)))
+	clog.Debug("reporter", fmt.Sprintf("%v", bytes.NewBuffer(report)))
 
 	url := "https://api.melody.systems/api/v0.1/submitreport"
 
