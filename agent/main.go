@@ -28,7 +28,7 @@ type System struct {
 	} `json:"CPU"`
 	Memory struct {
 		Total           int64   `json:"Total"`
-		Free            int64   `json:"Free"`
+		Available       int64   `json:"Available"`
 		PercentUsed     float64 `json:"PercentUsed"`
 		SwapTotal       int64   `json:"SwapTotal"`
 		SwapFree        int64   `json:"SwapFree"`
