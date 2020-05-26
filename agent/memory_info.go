@@ -29,8 +29,10 @@ func getMemoryInfo() {
 	system.Memory.SwapTotal = memStats["SwapTotal"] / 1024
 	system.Memory.SwapFree = memStats["SwapFree"] / 1024
 
-	if !(system.Memory.Total == 0 && system.Memory.SwapTotal == 0) {
+	if !(system.Memory.Total == 0) {
 		system.Memory.PercentUsed = (math.Round((float64(system.Memory.Total-system.Memory.Available)/float64(system.Memory.Total))*10000) / 100)
+	}
+	if !(system.Memory.SwapTotal == 0) {
 		system.Memory.SwapPercentUsed = (math.Round((float64(system.Memory.SwapTotal-system.Memory.SwapFree)/float64(system.Memory.SwapTotal))*100) / 100)
 	}
 }
