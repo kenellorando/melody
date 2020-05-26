@@ -2,32 +2,65 @@
 <html lang="en">
 <head>
     <meta charset="utf-8"/>
-    <title>Melody</title>
+    <title>Melody Systems</title>
 
+    <link rel="stylesheet" href="base.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script type="text/javascript">
-        $(document).ready(function () {
-            setTimeout(function () {getReport();}, 0);
-            setInterval(function () {getReport();}, 1000)
-        })
-
-        function getReport() {
-            $.ajax({
-                type: 'GET',
-                url: 'https://api.melody.systems/api/v0.1/getreport',
-                success: function(data) {
-                    console.log(data);
-                    document.getElementById("rawoutput").innerHTML = JSON.stringify(data);
-                }
-            })
-        }
-                    
-    </script>
+    <script src=main.js type="text/javascript"></script>
 </head>
 <body>
     <h1>Melody</h1>
-    <p>Systems Infrastructure Monitor</p>
+    <hr/>
+    
+    <div class="systemData">
+    <ul>
+        <li>Host:</li>
+        <ul>
+            <li>Hostname: <span id="hostname"></span></li>
+            <li>Kernel:</li>
+            <ul>
+                <li>Release: <span id="kernelRelease"></span></li>
+                <li>Version: <span id="kernelVersion"></span></li>
+            </ul>
+        </ul>
+        <li>CPU:</li>
+        <ul>
+            <li>Utilization: <span id="cpuUtilization"></span> %</li>
+            <li>Load Averages:</li>
+            <ul>
+                <li>One Minute: <span id="cpuLoadAvgOneMin"></span></li>
+                <li>Five Minutes: <span id="cpuLoadAvgFiveMin"></span></li>
+                <li>Fifteen Minutes: <span id="cpuLoadAvgFifteenMin"></span></li>
+            </ul>
+        </ul>
+        <li>Memory:</li>
+        <ul>
+            <li>Random Access:</li>
+            <ul>
+                <li>Total: <span id="memoryTotal"></span> megabytes</li>
+                <li>Available: <span id="memoryAvailable"></span> megabytes</li>
+                <li>Percent Used: <span id="memoryPercentUsed"></span> %</li>
+            </ul>
+            <li>Swap:</li>
+            <ul>
+                <li>Total: <span id="memorySwapTotal"></span> megabytes</li>
+                <li>Available: <span id="memorySwapFree"></span> megabytes</li>
+                <li>Percent Used: <span id="memorySwapPercentUsed"></span> %</li>
+            </ul>
+        </ul>
+        <li>Network:</li>
+            <ul>
+                <li>Public IP: <span id="networkPublicIP"></span></li>
+            </ul>
+    </ul>
+    </div>
+    <hr/>
 
-    <div id="rawoutput"></div>
+    <h2>About Melody</h2>
+    <p>Melody is a Linux systems infrastructure monitoring tool written in Go. The data you see above are real-time system metrics gathered from the server running <a href="https://cadenceradio.com">cadenceradio.com</a>.</p>
+    <p>Data is measured on the host server by an agent, which reports new measurements to a central API server. This webpage polls the API for the latest system data.</p>
+    <p>The project is still in an early state. For feedback, feel free to contact me.</p>
+    <div class="footer">A project by <a href="https://kenellorando.com/">Ken Ellorando</a></div>
 </body>
 </html>
