@@ -7,10 +7,14 @@ html, body {
 }
 
 html {
-    background-color: #1a1a1d;
-    color: rgb(241, 241, 241);
+    background-color: #ffffff;
+    color: rgb(0, 0, 0);
     font-family: 'Roboto', sans-serif;
     margin: 10px;
+}
+
+body {
+    max-width: 600px;
 }
 
 h1, h2, h3 {
@@ -23,68 +27,6 @@ a {
 
 .systemData {
     font-family: 'Roboto Mono', monospace;
-    color: rgb(255, 16, 136);
+    color: rgb(155, 12, 199);
 }
 
-.footer {
-    text-align: center;
-}
-
-/*** Media Queries 
-**********************************/
-@media (min-width: 600px) {
-    html {
-        font-size: 16px;
-        line-height: 150%;
-    }
-    body {
-        padding-left: 100px;
-        padding-right: 100px;
-        padding-top: 50px;
-        padding-bottom: 100px;
-    }
-}
-
-@media (min-width: 800px) {
-    body {
-        padding-left: 200px;
-        padding-right: 200px;
-        padding-top: 50px;
-        padding-bottom: 100px;
-    }
-}
-
-@media (min-width: 1000px) {
-    body {
-        padding-left: 250px;
-        padding-right: 250px;
-    }
-}
-
-@media (min-width: 1200px) {
-    body {
-        padding-left: 350px;
-        padding-right: 350px;
-    }
-}
-
-@media (min-width: 1400px) {
-    body {
-        padding-left: 450px;
-        padding-right: 450px;
-    }
-}
-
-@media (min-width: 1600px) {
-    body {
-        padding-left: 600px;
-        padding-right: 600px;
-    }
-}
-
-@media (min-width: 1900px) {
-    body {
-        padding-left: 680px;
-        padding-right: 680px;
-    }
-}
