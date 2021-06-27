@@ -47,13 +47,13 @@ func main() {
 
 func scheduler() {
 	// First time runs
-	go getCPUInfo()
+	//go getCPUInfo()
 	go getMemoryInfo()
 	go getNetworkInfo()
 	go getHostInfo()
 
 	// Agent data gathering time intervals
-	GetCPUInfoTicker := time.NewTicker(1 * time.Second)
+	//GetCPUInfoTicker := time.NewTicker(1 * time.Second)
 	GetMemoryInfoTicker := time.NewTicker(5 * time.Second)
 	GetNetworkInfoTicker := time.NewTicker(30 * time.Second)
 	GetHostInfoTicker := time.NewTicker(30 * time.Second)
@@ -61,8 +61,8 @@ func scheduler() {
 
 	for {
 		select {
-		case <-GetCPUInfoTicker.C:
-			go getCPUInfo()
+	//	case <-GetCPUInfoTicker.C:
+	//		go getCPUInfo()
 		case <-GetMemoryInfoTicker.C:
 			go getMemoryInfo()
 		case <-GetNetworkInfoTicker.C:
